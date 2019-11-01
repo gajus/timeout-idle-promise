@@ -1,0 +1,84 @@
+{
+  "author": {
+    "email": "gajus@gajus.com",
+    "name": "Gajus Kuizinas",
+    "url": "http://gajus.com"
+  },
+  "ava": {
+    "files": [
+      "test/**/*"
+    ],
+    "helpers": [
+      "test/helpers/**/*"
+    ],
+    "require": [
+      "@babel/register"
+    ],
+    "sources": [
+      "src/**/*"
+    ]
+  },
+  "dependencies": {
+    "es6-error": "^4.1.1"
+  },
+  "description": "Detects when a promise is idle (does not create asynchronous events) for longer than permitted amount of time.",
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-flow-strip-types": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "ava": "^2.4.0",
+    "babel-plugin-istanbul": "^5.2.0",
+    "coveralls": "^3.0.7",
+    "eslint": "^6.6.0",
+    "eslint-config-canonical": "^17.7.0",
+    "flow-bin": "^0.110.1",
+    "flow-copy-source": "^2.0.8",
+    "husky": "^3.0.9",
+    "nyc": "^14.1.1",
+    "semantic-release": "^15.13.28",
+    "sinon": "^7.5.0"
+  },
+  "engines": {
+    "node": ">6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test && npm run build"
+    }
+  },
+  "keywords": [
+    "timeout",
+    "idle",
+    "promise"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "./dist/index.js",
+  "name": "timeout-idle-promise",
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "instrument": false,
+    "reporter": [
+      "text-lcov"
+    ],
+    "require": [
+      "@babel/register"
+    ],
+    "sourceMap": false
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gajus/timeout-idle-promise"
+  },
+  "scripts": {
+    "build": "rm -fr ./dist && NODE_ENV=production babel ./src --out-dir ./dist --copy-files --source-maps && flow-copy-source src dist",
+    "lint": "eslint ./src ./test && flow",
+    "test": "NODE_ENV=test ava --verbose --serial"
+  },
+  "version": "1.0.0"
+}
